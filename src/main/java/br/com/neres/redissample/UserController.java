@@ -5,8 +5,6 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 public class UserController {
 
@@ -17,26 +15,26 @@ public class UserController {
     }
 
     @PostMapping
-    @CacheEvict(cacheNames = "User", allEntries = true)
-    public User create(@RequestBody final User user) {
-        return userRepository.save(user);
+    @CacheEvict(cacheNames = "Avatar", allEntries = true)
+    public Avatar create(@RequestBody final Avatar avatar) {
+        return userRepository.save(avatar);
     }
 
     @PutMapping
-    @CachePut(cacheNames = "User", key="#user.getId()")
-    public User update(@RequestBody final User user) {
-        return userRepository.save(user);
+    @CachePut(cacheNames = "Avatar", key="#avatar.getId()")
+    public Avatar update(@RequestBody final Avatar avatar) {
+        return userRepository.save(avatar);
     }
 
     @DeleteMapping("/{id}")
-    @CacheEvict(cacheNames = "User", key="#id")
+    @CacheEvict(cacheNames = "Avatar", key="#id")
     public void delete(@PathVariable("id") final Long id) {
         userRepository.deleteById(id);
     }
 
-    @GetMapping
-    @Cacheable(cacheNames = "User", key = "#id")
-    public User findById(@PathVariable("id") final Long id) {
-        return userRepository.findById(id).orElseGet(User::new);
+    @GetMapping("/{id}")
+    @Cacheable(cacheNames = "Avatar", key = "#id")
+    public Avatar findById(@PathVariable("id") final Long id) {
+        return userRepository.findById(id).orElseGet(Avatar::new);
     }
 }

@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.Duration;
 
 @SpringBootApplication
 @EnableCaching
+@EnableScheduling
 public class RedisSampleApplication {
 
 	public static void main(String[] args) {
